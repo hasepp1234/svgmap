@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サバゲーフィールド全国データベース（プロトタイプ）</title>
+<style>
+  :root {
+    --primary: #1f3864;
+    --accent: #2e5b8a;
+    --bg: #f4f6f9;
+    --card-bg: #ffffff;
+    --border: #dfe3ea;
+    --text: #24303d;
+    --muted: #6b7684;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #fff;
+    padding: 28px 20px 22px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 6px; font-size: 24px; }
+  header p { margin: 0; font-size: 13px; opacity: 0.85; }
+  .banner {
+    background: #fff8e1;
+    color: #7a5c00;
+    text-align: center;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-bottom: 1px solid #f0e0a0;
+  }
+  .controls {
+    max-width: 1000px;
+    margin: 18px auto 0;
+    padding: 0 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .controls input, .controls select {
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fff;
+  }
+  .controls input { flex: 1 1 220px; }
+  .controls select { flex: 0 1 150px; }
+  .controls button {
+    flex: 0 0 auto;
+    padding: 9px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  #searchBtn { background: var(--accent); color: #fff; }
+  #searchBtn:hover { background: var(--primary); }
+  #resetBtn { background: #e9edf3; color: var(--text); border: 1px solid var(--border) !important; }
+  #resetBtn:hover { background: #dde3ec; }
+  .count-bar {
+    max-width: 1000px;
+    margin: 10px auto 0;
+    padding: 0 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .grid {
+    max-width: 1000px;
+    margin: 12px auto 40px;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+  .card:hover { box-shadow: 0 4px 14px rgba(31,56,100,0.12); transform: translateY(-2px); }
+  .card .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-weight: 700;
+  }
+  .tag.outdoor { background: #e6f4ea; color: #2a7a3f; }
+  .tag.indoor { background: #eef0fb; color: #4a4ab5; }
+  .tag.region-kanto { background: linear-gradient(135deg, #dbeafe, #93c5fd); color: #1e40af; }
+  .tag.region-kansai { background: linear-gradient(135deg, #ffedd5, #fdba74); color: #9a3412; }
+  .tag.region-chubu { background: linear-gradient(135deg, #dcfce7, #86efac); color: #166534; }
+  .tag.region-kyushu { background: linear-gradient(135deg, #f3e8ff, #d8b4fe); color: #6b21a8; }
+  .tag.region-hokkaido-tohoku { background: linear-gradient(135deg, #ffe4e6, #fda4af); color: #9f1239; }
+  .card h3 { margin: 4px 0 6px; font-size: 16px; color: var(--primary); }
+  .card .loc { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .card .price { font-size: 13px; font-weight: 600; }
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 0;
+    font-size: 14px;
+  }
+  .overlay {
+    position: fixed; inset: 0; background: rgba(20,28,40,0.5);
+    display: none; align-items: center; justify-content: center; padding: 20px; z-index: 10;
+  }
+  .overlay.open { display: flex; }
+  .modal {
+    background: #fff; border-radius: 14px; max-width: 480px; width: 100%;
+    padding: 24px; max-height: 85vh; overflow-y: auto;
+  }
+  .modal h2 { color: var(--primary); margin-top: 0; }
+  .modal dl { margin: 14px 0; }
+  .modal dt { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  .modal dd { margin: 2px 0 0; font-size: 14px; }
+  .modal .close-btn {
+    display: inline-block; margin-top: 16px; padding: 9px 16px;
+    background: var(--accent); color: #fff; border: none; border-radius: 8px;
+    cursor: pointer; font-size: 14px;
+  }
+  .modal a { color: var(--accent); }
+  footer {
+    text-align: center; font-size: 12px; color: var(--muted); padding: 20px 0 30px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>サバゲーフィールド全国データベース</h1>
+  <p>公開情報をもとに整理した全国サバゲーフィールド一覧（プロトタイプ版）</p>
+</header>
+<div class="banner">⚠ 動作確認用プロトタイプです。料金・レンタル等は「要確認」の項目を含み、正式公開前に一次情報での検証が必要です。</div>
+
+<div class="controls">
+  <input id="search" type="text" placeholder="フィールド名・都道府県・市区町村で検索">
+  <select id="region"><option value="">地域：すべて</option></select>
+  <select id="type"><option value="">屋内/屋外：すべて</option></select>
+  <select id="rental"><option value="">レンタル：すべて</option><option value="あり">レンタルあり</option></select>
+  <button id="searchBtn" type="button">検索</button>
+  <button id="resetBtn" type="button">リセット</button>
+</div>
+<div class="count-bar" id="countBar"></div>
+<div class="grid" id="grid"></div>
+<footer>データ最終確認日：各カード内に記載 ／ 出典は詳細表示内に明記</footer>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modalBody"></div>
+</div>
+
+<script>
+const FIELDS = [{"id": 1, "region": "関東", "pref": "東京都", "city": "江東区(お台場)", "name": "東京サバゲパーク", "type": "屋内", "price": "通常定例会5,000円(予約)/5,500円(飛込)、フィールド貸切70,000〜105,000円(平日)", "rental": "電動ガン各種1,000〜2,000円、他装備品セット1,000円", "note": "監獄をイメージした複合サバイバルゲームスタジオ", "url": "https://www.tokyosabagepark.jp/", "source": "公式サイト(自動クロール+人手レビュー承認済み)", "last_checked": "2026-07-04", "meeting_fee": "5,000円(予約)/5,500円(飛込)", "meeting_min": "要確認", "field_count": "3面(A/B面+タクティカルレンジ)", "capacity": "要確認", "phone": "0476-48-5215"}, {"id": 2, "region": "関東", "pref": "千葉県", "city": "千葉市", "name": "SEALs", "type": "屋外", "price": "初心者3時間プラン 3,500円〜", "rental": "フルレンタル対応(手ぶらOK)", "note": "装備レンタル完備", "url": "", "source": "マイベスト(my-best.com)", "last_checked": "2026-07-04", "meeting_fee": "初心者3時間プラン3,500円〜", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 3, "region": "関東", "pref": "東京都", "city": "豊島区(池袋)", "name": "ASOBIBA 池袋", "type": "屋内", "price": "要公式サイト確認", "rental": "あり", "note": "都心アクセス良好", "url": "https://asobiba-tokyo.com/fields/ikebukuro/", "source": "asobiba-tokyo.com", "last_checked": "2026-07-04", "meeting_fee": "要確認", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 4, "region": "関西", "pref": "大阪府", "city": "大阪市住之江区", "name": "BBGUN", "type": "屋内", "price": "要公式サイト確認", "rental": "要確認", "note": "100名収容・2バトルフィールド完備", "url": "", "source": "ガンコレクト(gun-collect.com)", "last_checked": "2026-07-04", "meeting_fee": "要確認", "meeting_min": "要確認", "field_count": "2", "capacity": "100名", "phone": "要確認"}, {"id": 5, "region": "関西", "pref": "大阪府", "city": "吹田市(江坂)", "name": "CQBリミテッド", "type": "屋内", "price": "要公式サイト確認", "rental": "あり", "note": "江坂駅徒歩1分、初心者講習あり", "url": "", "source": "サバゲー装備研究室", "last_checked": "2026-07-04", "meeting_fee": "要確認", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 6, "region": "関西", "pref": "大阪府", "city": "岬町", "name": "みさきサバゲー", "type": "屋外", "price": "要公式サイト確認", "rental": "要確認", "note": "複合エリア+CQBエリア、スナイパー/ハンドガン向け", "url": "", "source": "サバガチ！(sabagachi.site)", "last_checked": "2026-07-04", "meeting_fee": "要確認", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 7, "region": "関西", "pref": "京都府", "city": "要確認", "name": "NEST", "type": "屋内", "price": "要公式サイト確認", "rental": "要確認", "note": "工場跡地を改装、観戦モニター完備", "url": "", "source": "サバゲー装備研究室", "last_checked": "2026-07-04", "meeting_fee": "要確認", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 8, "region": "中部", "pref": "静岡県", "city": "要確認", "name": "SPECIAL FORCE", "type": "屋外/屋内", "price": "個人 平日昼1,060円〜／貸切 平日昼17,500円〜", "rental": "要確認", "note": "個人利用・貸切プラン両対応", "url": "", "source": "サバゲーる(svgr.jp)", "last_checked": "2026-07-04", "meeting_fee": "平日昼1,060円〜(個人)", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 9, "region": "中部", "pref": "静岡県", "city": "伊東市", "name": "ORANGE BOX", "type": "屋外", "price": "1時間6,480円+施設利用324円/人", "rental": "エアガン・衣装(有料)", "note": "約80坪のフィールド", "url": "", "source": "サバゲーる(svgr.jp)", "last_checked": "2026-07-04", "meeting_fee": "1時間6,480円+施設利用324円/人", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 10, "region": "中部", "pref": "三重県", "city": "鈴鹿市", "name": "クロシェットサーフ", "type": "屋外", "price": "要公式サイト確認", "rental": "ゴーグル・グローブ無料", "note": "大型フィールド、ライトユーザー向け", "url": "", "source": "サバゲー情報局", "last_checked": "2026-07-04", "meeting_fee": "要確認", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 11, "region": "中部", "pref": "愛知県", "city": "瀬戸市", "name": "コンバットレディ愛知", "type": "屋内", "price": "要公式サイト確認", "rental": "豊富にあり", "note": "100名以上収容、ナイター24時まで営業", "url": "", "source": "サバゲー情報局", "last_checked": "2026-07-04", "meeting_fee": "要確認", "meeting_min": "要確認", "field_count": "要確認", "capacity": "100名以上", "phone": "要確認"}, {"id": 12, "region": "九州", "pref": "福岡県", "city": "糟屋郡新宮町", "name": "福岡サバゲーランド", "type": "屋外", "price": "定例会・平日サバゲー3,500円、貸切30,000円(10名まで、以降+2,000円/名)", "rental": "要確認", "note": "昼戦9:00〜17:00／夜戦18:00〜23:30", "url": "http://fukuokasabageland.com/", "source": "公式サイト(自動クロール+人手レビュー承認済み)", "last_checked": "2026-07-04", "meeting_fee": "3,500円(定例会・平日)", "meeting_min": "6名以上で開催", "field_count": "要確認", "capacity": "要確認", "phone": "要確認(LINE問い合わせ)"}, {"id": 13, "region": "九州", "pref": "福岡県", "city": "糸島市", "name": "ISGF(糸島サバイバルゲームフィールド)", "type": "屋外", "price": "1日遊び放題:男性2,500円/女性2,000円/未成年1,500円、貸切25,000円(10名まで)", "rental": "電動ガン2,000円、装備品各100〜1,500円、ビギナーズパック4,000円", "note": "雷山麓の森林フィールド、障害物100ヶ所以上", "url": "https://isgf.jp/", "source": "公式サイト(自動クロール+人手レビュー承認済み)", "last_checked": "2026-07-04", "meeting_fee": "男性2,500円/女性2,000円/未成年1,500円(1日遊び放題)", "meeting_min": "6名以上(平日開催条件)", "field_count": "1(バトルフィールド)", "capacity": "100名", "phone": "090-8768-1515"}, {"id": 14, "region": "九州", "pref": "福岡県", "city": "福岡市", "name": "Tactics Field", "type": "屋内", "price": "5,000円〜(社会人・男性)", "rental": "要確認", "note": "ビル3〜6階利用、無料送迎あり", "url": "", "source": "jalan.net", "last_checked": "2026-07-04", "meeting_fee": "5,000円〜(社会人・男性)", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 15, "region": "九州", "pref": "福岡県", "city": "宗像市", "name": "福岡サバゲーキャンプ宗像基地", "type": "屋外", "price": "大人3,000円／小中学生2,500円", "rental": "銃2,000円・ゴーグル/マスク300円", "note": "", "url": "https://sabagecampmunakata.com/", "source": "sabagecampmunakata.com", "last_checked": "2026-07-04", "meeting_fee": "大人3,000円/小中学生2,500円", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 16, "region": "北海道・東北", "pref": "北海道", "city": "札幌市", "name": "アリアケベース", "type": "屋外", "price": "要公式サイト確認", "rental": "要確認", "note": "敷地5ヘクタール、駐車場100台、4フィールド", "url": "", "source": "jalan.net", "last_checked": "2026-07-04", "meeting_fee": "要確認", "meeting_min": "要確認", "field_count": "4", "capacity": "要確認(駐車場100台)", "phone": "要確認"}, {"id": 17, "region": "北海道・東北", "pref": "北海道", "city": "札幌市西区", "name": "ワンダーランドサッポロ", "type": "屋外", "price": "要公式サイト確認", "rental": "電動ガン・防弾マスク・ブーツ込み", "note": "全長170mの大フィールド", "url": "", "source": "jalan.net", "last_checked": "2026-07-04", "meeting_fee": "要確認", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 18, "region": "北海道・東北", "pref": "北海道", "city": "江別市", "name": "北海道サバイバルゲームパーク", "type": "屋内(CQB)", "price": "定例会入場料3,000円、ビジター3,500円、半日割/学割2,000円", "rental": "レンタル銃1,000〜2,000円、フルセット3,000円", "note": "9,280㎡、毎週土日定例会、更衣室完備", "url": "https://hokkaido-hsp.com/", "source": "公式サイト(自動クロール+人手レビュー承認済み)", "last_checked": "2026-07-04", "meeting_fee": "定例会入場料3,000円", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認(9,280㎡)", "phone": "要確認"}, {"id": 19, "region": "北海道・東北", "pref": "宮城県", "city": "仙台市", "name": "スプリングバレー仙台泉", "type": "屋外", "price": "90分レンタルフルセット付き3,000円", "rental": "フルセット込み", "note": "東北最大級、テントサイト・シューティングレンジ完備", "url": "https://www.springvalley.co.jp/green/survivalgame", "source": "springvalley.co.jp", "last_checked": "2026-07-04", "meeting_fee": "90分3,000円(レンタルフルセット付)", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}, {"id": 20, "region": "北海道・東北", "pref": "宮城県", "city": "仙台市", "name": "ROCKFIELD3GUNS", "type": "要確認", "price": "要公式サイト確認", "rental": "レンタル銃あり", "note": "毎月定例会開催、貸切対応", "url": "", "source": "jalan.net", "last_checked": "2026-07-04", "meeting_fee": "要確認", "meeting_min": "要確認", "field_count": "要確認", "capacity": "要確認", "phone": "要確認"}];
+
+const grid = document.getElementById('grid');
+const searchInput = document.getElementById('search');
+const regionSel = document.getElementById('region');
+const typeSel = document.getElementById('type');
+const rentalSel = document.getElementById('rental');
+const searchBtn = document.getElementById('searchBtn');
+const resetBtn = document.getElementById('resetBtn');
+const countBar = document.getElementById('countBar');
+const overlay = document.getElementById('overlay');
+const modalBody = document.getElementById('modalBody');
+
+function uniq(arr) { return [...new Set(arr)]; }
+
+function populateSelect(sel, values) {
+  values.forEach(v => {
+    const opt = document.createElement('option');
+    opt.value = v; opt.textContent = v;
+    sel.appendChild(opt);
+  });
+}
+populateSelect(regionSel, uniq(FIELDS.map(f => f.region)));
+populateSelect(typeSel, uniq(FIELDS.map(f => f.type)));
+
+function tagClass(type) {
+  if (type.includes('屋外')) return 'outdoor';
+  if (type.includes('屋内')) return 'indoor';
+  return '';
+}
+
+const REGION_CLASS = {
+  '関東': 'region-kanto',
+  '関西': 'region-kansai',
+  '中部': 'region-chubu',
+  '九州': 'region-kyushu',
+  '北海道・東北': 'region-hokkaido-tohoku',
+};
+function regionClass(region) { return REGION_CLASS[region] || ''; }
+
+function render() {
+  const q = searchInput.value.trim().toLowerCase();
+  const region = regionSel.value;
+  const type = typeSel.value;
+  const rental = rentalSel.value;
+
+  const filtered = FIELDS.filter(f => {
+    if (region && f.region !== region) return false;
+    if (type && f.type !== type) return false;
+    if (rental) {
+      const hasRental = f.rental && f.rental !== '要確認' && f.rental !== '';
+      if (!hasRental) return false;
+    }
+    if (q) {
+      const hay = (f.name + f.pref + f.city + f.note).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  countBar.textContent = `${filtered.length} 件 / 全 ${FIELDS.length} 件`;
+  grid.innerHTML = '';
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty">条件に一致するフィールドがありません</div>';
+    return;
+  }
+  filtered.forEach(f => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="tags">
+        <span class="tag ${tagClass(f.type)}">${f.type}</span>
+        <span class="tag ${regionClass(f.region)}">${f.region}</span>
+      </div>
+      <h3>${f.name}</h3>
+      <div class="loc">${f.pref} ${f.city}</div>
+      <div class="price">${f.meeting_fee}</div>
+    `;
+    card.addEventListener('click', () => openModal(f));
+    grid.appendChild(card);
+  });
+}
+
+function openModal(f) {
+  modalBody.innerHTML = `
+    <h2>${f.name}</h2>
+    <dl>
+      <dt>所在地</dt><dd>${f.pref} ${f.city}</dd>
+      <dt>タイプ</dt><dd>${f.type}</dd>
+      <dt>定例会費用</dt><dd>${f.meeting_fee}</dd>
+      <dt>定例会人数</dt><dd>${f.meeting_min}</dd>
+      <dt>レンタル</dt><dd>${f.rental}</dd>
+      <dt>フィールド数</dt><dd>${f.field_count}</dd>
+      <dt>収容人数</dt><dd>${f.capacity}</dd>
+      <dt>特徴・備考</dt><dd>${f.note || 'ー'}</dd>
+      <dt>公式サイト</dt><dd>${f.url ? `<a href="${f.url}" target="_blank" rel="noopener">${f.url}</a>` : '要確認'}</dd>
+      <dt>電話番号</dt><dd>${f.phone}</dd>
+      <dt>最終確認日</dt><dd>${f.last_checked || '2026-07-04'}</dd>
+    </dl>
+    <button class="close-btn" id="closeBtn">閉じる</button>
+  `;
+  overlay.classList.add('open');
+  document.getElementById('closeBtn').addEventListener('click', closeModal);
+}
+function closeModal() { overlay.classList.remove('open'); }
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+function resetFilters() {
+  searchInput.value = '';
+  regionSel.value = '';
+  typeSel.value = '';
+  rentalSel.value = '';
+  render();
+}
+
+[regionSel, typeSel, rentalSel].forEach(el => {
+  el.addEventListener('change', render);
+});
+searchInput.addEventListener('input', render);
+searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') render(); });
+searchBtn.addEventListener('click', render);
+resetBtn.addEventListener('click', resetFilters);
+
+render();
+</script>
+</body>
+</html>
