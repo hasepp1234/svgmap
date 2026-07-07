@@ -166,6 +166,35 @@
   }
   footer .footer-nav a { color: var(--muted); margin: 0 8px; }
   footer .footer-note { margin-top: 8px; }
+  .faq {
+    max-width: 1000px;
+    margin: 8px auto 40px;
+    padding: 0 16px;
+  }
+  .faq h2 {
+    font-size: 18px;
+    color: var(--primary);
+    margin: 0 0 12px;
+  }
+  .faq details {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+  }
+  .faq summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .faq details p {
+    margin: 10px 0 2px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9618539805759239"
      crossorigin="anonymous"></script>
@@ -744,6 +773,54 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "全国のサバゲーフィールドは何件掲載されていますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "2026年7月時点で、全国94件のサバゲー（エアソフト）フィールドの情報を掲載しています。北海道から沖縄まで全国のフィールドを収録し、随時更新しています。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "掲載されている情報の出典は？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "各フィールドの公式サイト・公式SNS（X/Instagram等）の公開情報をもとに、AIと人手で確認・整理しています。フィールドごとの詳細ページに出典と最終確認日を明記しています。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "初心者でも装備なしで参加できるフィールドはありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "あります。一覧の「レンタル」条件で絞り込むことで、電動ガンや装備一式をレンタルできるフィールドのみを表示できます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "屋内・屋外どちらのフィールドも探せますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。「屋内/屋外」の条件で絞り込み検索ができ、天候を気にせず遊べる屋内（インドア）フィールドと、広大な自然を活かした屋外（アウトドア）フィールドの両方を掲載しています。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "料金や営業状況は最新ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "掲載情報は定期的に確認・更新していますが、料金改定や営業状況の変更が生じる場合があります。最新情報は必ず各フィールドの公式サイト・公式SNSでご確認ください。"
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -763,6 +840,29 @@
 </div>
 <div class="count-bar" id="countBar"></div>
 <div class="grid" id="grid"></div>
+<div class="faq" id="faq">
+  <h2>よくある質問</h2>
+  <details>
+    <summary>全国のサバゲーフィールドは何件掲載されていますか？</summary>
+    <p>2026年7月時点で、全国94件のサバゲー（エアソフト）フィールドの情報を掲載しています。北海道から沖縄まで全国のフィールドを収録し、随時更新しています。</p>
+  </details>
+  <details>
+    <summary>掲載されている情報の出典は？</summary>
+    <p>各フィールドの公式サイト・公式SNS（X/Instagram等）の公開情報をもとに、AIと人手で確認・整理しています。フィールドごとの詳細ページに出典と最終確認日を明記しています。</p>
+  </details>
+  <details>
+    <summary>初心者でも装備なしで参加できるフィールドはありますか？</summary>
+    <p>あります。一覧の「レンタル」条件で絞り込むことで、電動ガンや装備一式をレンタルできるフィールドのみを表示できます。</p>
+  </details>
+  <details>
+    <summary>屋内・屋外どちらのフィールドも探せますか？</summary>
+    <p>はい。「屋内/屋外」の条件で絞り込み検索ができ、天候を気にせず遊べる屋内（インドア）フィールドと、広大な自然を活かした屋外（アウトドア）フィールドの両方を掲載しています。</p>
+  </details>
+  <details>
+    <summary>料金や営業状況は最新ですか？</summary>
+    <p>掲載情報は定期的に確認・更新していますが、料金改定や営業状況の変更が生じる場合があります。最新情報は必ず各フィールドの公式サイト・公式SNSでご確認ください。</p>
+  </details>
+</div>
 <footer>
   <div class="footer-note">データ最終確認日：各カード内に記載 ／ 出典は詳細表示内に明記</div>
   <div class="footer-nav" style="margin-top:12px;"><a href="/about.html">運営者情報</a> | <a href="/privacy.html">プライバシーポリシー</a> | <a href="/contact.html">お問い合わせ</a></div>
