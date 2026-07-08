@@ -195,6 +195,55 @@
     color: var(--muted);
     line-height: 1.7;
   }
+  .gear {
+    max-width: 1000px;
+    margin: 8px auto 40px;
+    padding: 0 16px;
+  }
+  .gear h2 {
+    font-size: 18px;
+    color: var(--primary);
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .gear .pr-badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--muted);
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+  .gear .gear-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 14px;
+  }
+  .gear-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .gear-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+  .gear-card:hover { box-shadow: 0 4px 14px rgba(31,56,100,0.12); transform: translateY(-2px); }
+  .gear-card img { width: 96px; height: 96px; object-fit: contain; margin-bottom: 8px; }
+  .gear-card .gear-label { font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 4px; }
+  .gear-card .gear-name { font-size: 12px; line-height: 1.5; margin-bottom: 6px; }
+  .gear-card .gear-price { font-size: 13px; font-weight: 700; color: var(--primary); }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9618539805759239"
      crossorigin="anonymous"></script>
@@ -862,6 +911,36 @@
     <summary>料金や営業状況は最新ですか？</summary>
     <p>掲載情報は定期的に確認・更新していますが、料金改定や営業状況の変更が生じる場合があります。最新情報は必ず各フィールドの公式サイト・公式SNSでご確認ください。</p>
   </details>
+</div>
+<div class="gear" id="gear">
+  <h2>おすすめ装備（楽天市場）<span class="pr-badge">PR</span></h2>
+  <p class="gear-note">サバゲー・エアソフトで使える人気アイテムを楽天市場から紹介しています。価格・在庫は変動する場合があります。</p>
+  <div class="gear-grid">
+  <a class="gear-card" href="https://rpx.a8.net/svt/ejp?a8mat=4B7UT5+12P73M+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00t7ui4.2bo11e77.g00t7ui4.2bo1269f%2Fa26070732813_4B7UT5_12P73M_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fchic-41%252Fb01haes8wa1%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fchic-41%252Fi%252F10000092%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" target="_blank" rel="nofollow noopener sponsored">
+    <span class="gear-label">保護ゴーグル</span>
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/chic-41/cabinet/12541254124.jpg?_ex=128x128" alt="タクティカルゴーグル ミリタリー バイク ツーリング 作業用【メーカー30日保証付き】" loading="lazy" width="96" height="96">
+    <span class="gear-name">タクティカルゴーグル ミリタリー バイク ツーリング 作業用【メーカー30日保証付き】</span>
+    <span class="gear-price">1,580円</span>
+  </a>
+  <a class="gear-card" href="https://rpx.a8.net/svt/ejp?a8mat=4B7UT5+12P73M+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00t1ak4.2bo11391.g00t1ak4.2bo12035%2Fa26070732813_4B7UT5_12P73M_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fbeetech%252Fbt-fba-037%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fbeetech%252Fi%252F10002084%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" target="_blank" rel="nofollow noopener sponsored">
+    <span class="gear-label">タクティカルグローブ</span>
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/beetech/cabinet/new_gazou_5/bt-fba-037.jpg?_ex=128x128" alt="【楽天ランキング1位獲得】グローブ 手袋 左右セット サバゲー バイク 自転車 ミリタリー スポーツ アウトドア タッチパネル ナックルガード" loading="lazy" width="96" height="96">
+    <span class="gear-name">【楽天ランキング1位獲得】グローブ 手袋 左右セット サバゲー バイク 自転車 ミリタリー スポーツ アウトドア タッチパネル ナックルガード</span>
+    <span class="gear-price">2,480円</span>
+  </a>
+  <a class="gear-card" href="https://rpx.a8.net/svt/ejp?a8mat=4B7UT5+12P73M+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00rer44.2bo1114d.g00rer44.2bo12f73%2Fa26070732813_4B7UT5_12P73M_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fauc-outsider%252Fmask-016%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fauc-outsider%252Fi%252F10003033%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" target="_blank" rel="nofollow noopener sponsored">
+    <span class="gear-label">フェイスマスク</span>
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/auc-outsider/cabinet/mask/mask-016-001.jpg?_ex=128x128" alt="SHENKEL シェンケル 耳まで保護 曇らない メッシュ マスク ハーフ フェイスガード フェイスマスク" loading="lazy" width="96" height="96">
+    <span class="gear-name">SHENKEL シェンケル 耳まで保護 曇らない メッシュ マスク ハーフ フェイスガード フェイスマスク</span>
+    <span class="gear-price">3,410円</span>
+  </a>
+  <a class="gear-card" href="https://rpx.a8.net/svt/ejp?a8mat=4B7UT5+12P73M+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00s1oo4.2bo111c9.g00s1oo4.2bo1255f%2Fa26070732813_4B7UT5_12P73M_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fmokei-paddock%252F601368%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fmokei-paddock%252Fi%252F10010374%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" target="_blank" rel="nofollow noopener sponsored">
+    <span class="gear-label">電動ガン初心者セット</span>
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/mokei-paddock/cabinet/set/imgrc0073863108.jpg?_ex=128x128" alt="東京マルイ 電動ハンドガン ハイキャパE ガバメントモデル フルセット(初心者向 電動ガンセット)" loading="lazy" width="96" height="96">
+    <span class="gear-name">東京マルイ 電動ハンドガン ハイキャパE ガバメントモデル フルセット(初心者向 電動ガンセット)</span>
+    <span class="gear-price">29,800円</span>
+  </a>
+  </div>
 </div>
 <footer>
   <div class="footer-note">データ最終確認日：各カード内に記載 ／ 出典は詳細表示内に明記</div>
