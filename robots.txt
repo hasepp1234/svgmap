@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.svgmap.site/sitemap.xml
+Sitemap: https://www.sabage-db.com/sitemap.xml
