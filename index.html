@@ -114,6 +114,7 @@
     transition: box-shadow 0.15s, transform 0.15s;
   }
   .card:hover { box-shadow: 0 4px 14px rgba(31,56,100,0.12); transform: translateY(-2px); }
+  .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   .card .detail-link { display: inline-block; margin-top: 8px; font-size: 12px; color: var(--accent); text-decoration: none; }
   .card .detail-link:hover { text-decoration: underline; }
   .card .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
@@ -948,7 +949,7 @@
 </footer>
 
 <div class="overlay" id="overlay">
-  <div class="modal" id="modalBody"></div>
+  <div class="modal" id="modalBody" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1"></div>
 </div>
 
 <script>
@@ -1024,6 +1025,9 @@ function render() {
   filtered.forEach(f => {
     const card = document.createElement('div');
     card.className = 'card';
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `${f.name}のクイックビューを開く`);
     card.innerHTML = `
       <div class="tags">
         <span class="tag ${tagClass(f.type)}">${f.type}</span>
@@ -1035,13 +1039,21 @@ function render() {
       <a class="detail-link" href="/fields/${f.slug}.html" onclick="event.stopPropagation()" aria-label="${f.name}の詳細ページを見る">詳細ページを見る →</a>
     `;
     card.addEventListener('click', () => openModal(f));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(f);
+      }
+    });
     grid.appendChild(card);
   });
 }
 
+let lastFocusedEl = null;
 function openModal(f) {
+  lastFocusedEl = document.activeElement;
   modalBody.innerHTML = `
-    <h2>${f.name}</h2>
+    <h2 id="modalTitle">${f.name}</h2>
     <dl>
       <dt>所在地</dt><dd>${f.pref} ${f.city}</dd>
       <dt>タイプ</dt><dd>${f.type}</dd>
@@ -1060,8 +1072,25 @@ function openModal(f) {
   `;
   overlay.classList.add('open');
   document.getElementById('closeBtn').addEventListener('click', closeModal);
+  document.addEventListener('keydown', handleModalKeydown);
+  modalBody.focus();
 }
-function closeModal() { overlay.classList.remove('open'); }
+function closeModal() {
+  overlay.classList.remove('open');
+  document.removeEventListener('keydown', handleModalKeydown);
+  if (lastFocusedEl) lastFocusedEl.focus();
+}
+function handleModalKeydown(e) {
+  if (e.key === 'Escape') { closeModal(); return; }
+  if (e.key === 'Tab') {
+    const focusable = modalBody.querySelectorAll('a[href], button');
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+}
 overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 
 function resetFilters() {
