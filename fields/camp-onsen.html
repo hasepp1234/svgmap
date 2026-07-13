@@ -47,6 +47,17 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"サバゲーフィールド全国データベース","item":"https://www.sabage-db.com/"},
+    {"@type":"ListItem","position":2,"name":"九州","item":"https://www.sabage-db.com/?region=%E4%B9%9D%E5%B7%9E"},
+    {"@type":"ListItem","position":3,"name":"CAMP御戦","item":"https://www.sabage-db.com/fields/camp-onsen.html"}
+  ]
+}
+</script>
 <style>
   :root {
     --primary: #1f3864;
@@ -147,6 +158,21 @@
   .gear-top-pick a:hover { background: #fff2de; }
   .gear-top-pick img { width: 40px; height: 40px; object-fit: contain; flex-shrink: 0; border-radius: 6px; }
   .gear-top-pick .gtp-label { font-size: 10px; font-weight: 700; color: #fff; background: var(--muted); border-radius: 4px; padding: 1px 5px; margin-left: 6px; }
+
+  .breadcrumb { font-size: 12px; color: var(--muted); margin: 0 0 14px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .toc { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 16px 0 4px; padding: 10px 14px; background: #fff; border: 1px solid var(--border); border-radius: 8px; font-size: 12px; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  table tr[id] { scroll-margin-top: 12px; }
+  @media (max-width: 480px) {
+    table, table tbody, table tr, table th, table td { display: block; width: auto; }
+    table { border: none; }
+    table tr { border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; }
+    table th { background: none; border: none; padding: 0; font-size: 12px; color: var(--muted); white-space: normal; }
+    table td { border: none; padding: 4px 0 0; }
+  }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9618539805759239"
      crossorigin="anonymous"></script>
@@ -157,6 +183,7 @@
   <a href="/">← サバゲーフィールド全国データベースに戻る</a>
 </header>
 <main>
+<nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">TOP</a> <span aria-hidden="true">&gt;</span> <a href="/?region=%E4%B9%9D%E5%B7%9E">九州</a> <span aria-hidden="true">&gt;</span> <span aria-current="page">CAMP御戦</span></nav>
   <p>大分県杵築市山香町大字野原3-4657-182にあるサバゲー(エアソフト)フィールド「CAMP御戦」の情報です。料金・レンタル有無・アクセスなどの詳細は下記をご確認ください。掲載情報は公式サイト等をもとに整理していますが、最新の料金・営業状況は必ず公式サイトでご確認ください。</p>
 <div class="gear-top-pick">
     <a href="https://rpx.a8.net/svt/ejp?a8mat=4B7UT5+12P73M+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00t7ui4.2bo11e77.g00t7ui4.2bo1269f%2Fa26070732813_4B7UT5_12P73M_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fchic-41%252Fb01haes8wa1%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fchic-41%252Fi%252F10000092%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" target="_blank" rel="nofollow noopener sponsored">
@@ -165,24 +192,30 @@
     </a>
   </div>
     <p class="field-note">屋外の開放的なフィールドで、本格的な野戦アクションを楽しめます。CQBと森の複合型フィールド。休憩所は駐車場から近く、夏は扇風機・冬は薪ストーブあり。毎週日曜フリー参加デー開催。レンタル装備の詳細は公式サイトでの確認をおすすめします。</p>
-  <table data-enriched="6">
+    <nav class="toc" aria-label="ページ内目次">
+    <a href="#toc-price">料金</a>
+    <a href="#toc-hours">営業時間</a>
+    <a href="#toc-access">アクセス</a>
+    <a href="#toc-contact">連絡先・SNS</a>
+  </nav>
+<table data-enriched="6">
     <tr><th>所在地</th><td>大分県 杵築市山香町大字野原3-4657-182</td></tr>
     <tr><th>住所(詳細)</th><td>〒879-1307 大分県杵築市山香町大字野原3-4657-182</td></tr>
     <tr><th>特徴・備考</th><td>CQBと森の複合型フィールド。休憩所は駐車場から近く、夏は扇風機・冬は薪ストーブあり。毎週日曜フリー参加デー開催</td></tr>
     <tr><th>タイプ</th><td>屋外</td></tr>
     <tr><th>フィールド数</th><td>要確認</td></tr>
     <tr><th>収容人数</th><td>要確認</td></tr>
-    <tr><th>定例会費用</th><td>日祝2,500円/平日2,000円(女性は各500円引き)</td></tr>
+    <tr id="toc-price"><th>定例会費用</th><td>日祝2,500円/平日2,000円(女性は各500円引き)</td></tr>
     <tr><th>定例会人数</th><td>要確認</td></tr>
     <tr><th>昼食</th><td>確認中(公式サイトに記載なし)。ドリップコーヒーの提供あり(2022年11月開始)</td></tr>
     <tr><th>レンタル</th><td>要確認</td></tr>
-    <tr><th>定休日</th><td>確認中(公式サイトに記載なし)</td></tr>
+    <tr id="toc-hours"><th>定休日</th><td>確認中(公式サイトに記載なし)</td></tr>
     <tr><th>営業時間</th><td>確認中(固定営業時間の記載なし。フリー参加デーゲームは10時オープン・11時スタート・17時終了が基本)</td></tr>
-    <tr><th>電車でのアクセス(最寄り駅)・送迎の有無</th><td>確認中(公式サイトに記載なし)</td></tr>
+    <tr id="toc-access"><th>電車でのアクセス(最寄り駅)・送迎の有無</th><td>確認中(公式サイトに記載なし)</td></tr>
     <tr><th>車でのアクセス</th><td>国道10号線方面、速見インターまたは大分農業文化公園方面から廃材置き場や牧場の牛舎を目印に案内あり(具体的なIC名・所要時間の記載なし)</td></tr>
     <tr><th>駐車場</th><td>フィールド駐車場あり(台数・料金の記載なし)</td></tr>
     <tr><th>最寄りコンビニ</th><td>確認中(公式サイトに記載なし)</td></tr>
-    <tr><th>電話番号</th><td><a href="tel:07026195140">070-2619-5140</a></td></tr>
+    <tr id="toc-contact"><th>電話番号</th><td><a href="tel:07026195140">070-2619-5140</a></td></tr>
     <tr><th>公式サイト</th><td><a href="https://camp-onsen.com/" target="_blank" rel="noopener noreferrer">https://camp-onsen.com/</a></td></tr>
     <tr><th>公式SNS</th><td><a href="https://www.facebook.com/camp.onsen" target="_blank" rel="noopener noreferrer">Facebook</a>／<a href="https://twitter.com/2mouse_CQB" target="_blank" rel="noopener noreferrer">X</a>／<a href="https://www.instagram.com/camp_onsen/" target="_blank" rel="noopener noreferrer">Instagram</a>／<a href="https://line.me/R/ti/p/%40tsx7194s" target="_blank" rel="noopener noreferrer">LINE</a>／<a href="https://www.youtube.com/channel/UCz6zE-FEEh_9U3xlAhSN26w" target="_blank" rel="noopener noreferrer">YouTube</a></td></tr>
     <tr><th>最終確認日</th><td>2026-07-07</td></tr>
