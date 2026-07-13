@@ -11,6 +11,12 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <title>GreatPlains Shiga(グレートプレーンズ志賀)｜宮城県岩沼市のサバゲーフィールド情報 - サバゲーフィールド全国データベース</title>
 <meta name="description" content="GreatPlains Shiga(グレートプレーンズ志賀)(宮城県岩沼市)の料金・レンタル有無・アクセス情報。全国のサバゲー(エアソフト)フィールドを検索・比較できるサバゲーフィールド全国データベースに掲載。">
 <meta property="og:type" content="website">
@@ -69,18 +75,30 @@
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", sans-serif;
+    font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Sans", "Meiryo", sans-serif;
     background: var(--bg);
     color: var(--text);
   }
   header {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(135deg, var(--primary), var(--accent));
     color: #fff;
     padding: 28px 20px 22px;
     text-align: center;
   }
+  header::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url('/header-pattern.svg');
+    background-size: 200px 200px;
+    background-repeat: repeat;
+    pointer-events: none;
+  }
+  header h1, header a { position: relative; z-index: 1; }
   header h1 { margin: 0 0 6px; font-size: 22px; }
   header a { color: #fff; opacity: 0.85; font-size: 13px; }
+  .site-logo { width: 22px; height: 22px; vertical-align: -5px; margin-right: 6px; }
   main {
     max-width: 720px;
     margin: 24px auto 60px;
@@ -177,13 +195,35 @@
   .map-embed h2 { color: var(--primary); font-size: 16px; margin: 0 0 8px; scroll-margin-top: 12px; }
   .map-frame-wrap { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; border: 1px solid var(--border); }
   .map-frame-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+  .ad-slot { margin: 20px 0; }
+  .ad-slot-inner {
+    min-height: 100px;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff; border: 1px dashed var(--border); border-radius: 8px;
+    color: var(--muted); font-size: 11px; letter-spacing: 0.05em;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14181f;
+      --border: #2b323c;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+    }
+    table th { background: #232a34; }
+    .gear-mini { background: #1c222b; }
+    .gear-top-pick a { background: #241f14; border-color: #4a3f16; }
+    .toc { background: #1c222b; }
+    .ad-slot-inner { background: #1c222b; }
+  }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9618539805759239"
      crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
-  <h1>GreatPlains Shiga(グレートプレーンズ志賀)</h1>
+  <h1><svg class="site-logo" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="32" r="6" fill="#fff"/><line x1="32" y1="4" x2="32" y2="16" stroke="#fff" stroke-width="3"/><line x1="32" y1="48" x2="32" y2="60" stroke="#fff" stroke-width="3"/><line x1="4" y1="32" x2="16" y2="32" stroke="#fff" stroke-width="3"/><line x1="48" y1="32" x2="60" y2="32" stroke="#fff" stroke-width="3"/></svg>GreatPlains Shiga(グレートプレーンズ志賀)</h1>
   <a href="/">← サバゲーフィールド全国データベースに戻る</a>
 </header>
 <main>
@@ -232,6 +272,7 @@
     <iframe src="https://www.google.com/maps?q=GreatPlains%20Shiga%28%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%88%E3%83%97%E3%83%AC%E3%83%BC%E3%83%B3%E3%82%BA%E5%BF%97%E8%B3%80%29%20%E3%80%92989-2465%20%E5%AE%AE%E5%9F%8E%E7%9C%8C%E5%B2%A9%E6%B2%BC%E5%B8%82%E5%BF%97%E8%B3%80%E5%AD%97%E7%A5%A2%E5%AE%9C%E5%86%851%E7%95%AA1&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="GreatPlains Shiga(グレートプレーンズ志賀)の地図"></iframe>
   </div>
 </div>
+  <div class="ad-slot"><div class="ad-slot-inner" aria-hidden="true">広告スペース</div></div>
   <a class="back-link" href="/">← 全国のサバゲーフィールド一覧に戻る</a>
 <div class="gear-mini">
     <h3>この分野で使えるアイテム（楽天市場）<span class="pr-badge">PR</span></h3>
