@@ -879,6 +879,12 @@
   <select id="region" aria-label="地域で絞り込み"><option value="">地域：すべて</option></select>
   <select id="type" aria-label="屋内・屋外で絞り込み"><option value="">屋内/屋外：すべて</option></select>
   <select id="rental" aria-label="レンタルの有無で絞り込み"><option value="">レンタル：すべて</option><option value="あり">レンタルあり</option></select>
+  <select id="sort" aria-label="並べ替え">
+    <option value="">並び替え：標準</option>
+    <option value="checked-desc">最終確認日が新しい順</option>
+    <option value="price-asc">定例会費用が安い順</option>
+    <option value="price-desc">定例会費用が高い順</option>
+  </select>
   <button id="searchBtn" type="button">検索</button>
   <button id="resetBtn" type="button">リセット</button>
 </div>
@@ -954,6 +960,7 @@ const searchInput = document.getElementById('search');
 const regionSel = document.getElementById('region');
 const typeSel = document.getElementById('type');
 const rentalSel = document.getElementById('rental');
+const sortSel = document.getElementById('sort');
 const searchBtn = document.getElementById('searchBtn');
 const resetBtn = document.getElementById('resetBtn');
 const countBar = document.getElementById('countBar');
@@ -990,11 +997,18 @@ const REGION_CLASS = {
 };
 function regionClass(region) { return REGION_CLASS[region] || ''; }
 
+function minPriceOf(f) {
+  const src = (f.meeting_fee || f.price || '');
+  const nums = (src.match(/[0-9][0-9,]*/g) || []).map(s => parseInt(s.replace(/,/g, ''), 10)).filter(n => !isNaN(n));
+  return nums.length ? Math.min(...nums) : null;
+}
+
 function render() {
   const q = searchInput.value.trim().toLowerCase();
   const region = regionSel.value;
   const type = typeSel.value;
   const rental = rentalSel.value;
+  const sort = sortSel ? sortSel.value : '';
 
   const filtered = FIELDS.filter(f => {
     if (region && f.region !== region) return false;
@@ -1009,6 +1023,19 @@ function render() {
     }
     return true;
   });
+
+  if (sort === 'checked-desc') {
+    filtered.sort((a, b) => (b.last_checked || '').localeCompare(a.last_checked || ''));
+  } else if (sort === 'price-asc' || sort === 'price-desc') {
+    const dir = sort === 'price-asc' ? 1 : -1;
+    filtered.sort((a, b) => {
+      const pa = minPriceOf(a), pb = minPriceOf(b);
+      if (pa === null && pb === null) return 0;
+      if (pa === null) return 1;
+      if (pb === null) return -1;
+      return (pa - pb) * dir;
+    });
+  }
 
   countBar.textContent = `${filtered.length} 件 / 全 ${FIELDS.length} 件`;
   grid.innerHTML = '';
@@ -1104,13 +1131,22 @@ function resetFilters() {
   render();
 }
 
-[regionSel, typeSel, rentalSel].forEach(el => {
+[regionSel, typeSel, rentalSel, sortSel].forEach(el => {
   el.addEventListener('change', render);
 });
 searchInput.addEventListener('input', render);
 searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') render(); });
 searchBtn.addEventListener('click', render);
 resetBtn.addEventListener('click', resetFilters);
+
+// URLのクエリパラメータ(?region=...)で地域を初期選択（フィールド詳細ページのパンくずリストからの遷移用）
+(function applyRegionFromQuery() {
+  const params = new URLSearchParams(location.search);
+  const region = params.get('region');
+  if (region && [...regionSel.options].some(o => o.value === region)) {
+    regionSel.value = region;
+  }
+})();
 
 render();
 </script>
