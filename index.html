@@ -13,6 +13,12 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <meta name="description" content="全国のサバゲー(エアソフト・サバイバルゲーム)フィールドを地域・料金・屋内外・レンタル有無などの条件で検索・比較できるデータベースサイト。公式サイト等の公開情報をもとに整理しています。">
 <title>サバゲーフィールド全国データベース｜検索・比較サイト</title>
 <meta property="og:type" content="website">
@@ -40,18 +46,49 @@
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", sans-serif;
+    font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Sans", "Meiryo", sans-serif;
     background: var(--bg);
     color: var(--text);
   }
   header {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(135deg, var(--primary), var(--accent));
     color: #fff;
     padding: 28px 20px 22px;
     text-align: center;
   }
+  header::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url('/header-pattern.svg');
+    background-size: 200px 200px;
+    background-repeat: repeat;
+    pointer-events: none;
+  }
+  header h1, header p { position: relative; z-index: 1; }
   header h1 { margin: 0 0 6px; font-size: 24px; }
   header p { margin: 0; font-size: 13px; opacity: 0.85; }
+  .site-logo { width: 26px; height: 26px; vertical-align: -6px; margin-right: 8px; }
+  .tag-icon { width: 11px; height: 11px; vertical-align: -1px; margin-right: 3px; fill: currentColor; }
+  .ad-slot {
+    max-width: 1000px;
+    margin: 14px auto 0;
+    padding: 0 16px;
+  }
+  .ad-slot-inner {
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 480px) { .ad-slot-inner { min-height: 80px; } }
   .banner {
     background: #fff8e1;
     color: #7a5c00;
@@ -245,6 +282,21 @@
   .gear-card .gear-label { font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 4px; }
   .gear-card .gear-name { font-size: 12px; line-height: 1.5; margin-bottom: 6px; }
   .gear-card .gear-price { font-size: 13px; font-weight: 700; color: var(--primary); }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14181f;
+      --card-bg: #1c222b;
+      --border: #2b323c;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+    }
+    .banner { background: #2b2510; color: #e8d27a; border-bottom-color: #4a3f16; }
+    .controls input, .controls select { background: var(--card-bg); color: var(--text); }
+    #resetBtn { background: #232b36; }
+    #resetBtn:hover { background: #2b3542; }
+    .modal { background: var(--card-bg); }
+  }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9618539805759239"
      crossorigin="anonymous"></script>
@@ -869,10 +921,11 @@
 <body>
 
 <header>
-  <h1>サバゲーフィールド全国データベース</h1>
+  <h1><svg class="site-logo" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="32" r="6" fill="#fff"/><line x1="32" y1="4" x2="32" y2="16" stroke="#fff" stroke-width="3"/><line x1="32" y1="48" x2="32" y2="60" stroke="#fff" stroke-width="3"/><line x1="4" y1="32" x2="16" y2="32" stroke="#fff" stroke-width="3"/><line x1="48" y1="32" x2="60" y2="32" stroke="#fff" stroke-width="3"/></svg>サバゲーフィールド全国データベース</h1>
   <p>公開情報をもとに整理した、全国のサバゲー（エアソフト）フィールド検索・比較サイト</p>
 </header>
 <div class="banner">⚠ 掲載情報は各フィールドの公式サイト等の公開情報をもとに作成していますが、一部「要確認」の項目を含みます。ご利用の際は必ず各フィールドの公式サイト・公式SNS等で最新の料金・営業状況をご確認ください。</div>
+<div class="ad-slot"><div class="ad-slot-inner" aria-hidden="true">広告スペース</div></div>
 
 <div class="controls">
   <input id="search" type="text" placeholder="フィールド名・都道府県・市区町村で検索" aria-label="フィールド名・都道府県・市区町村で検索">
@@ -985,6 +1038,17 @@ function tagClass(type) {
   return '';
 }
 
+const ICON_HOUSE = '<svg class="tag-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2 2 8v9a1 1 0 0 0 1 1h4v-6h6v6h4a1 1 0 0 0 1-1V8z"/></svg>';
+const ICON_TREE = '<svg class="tag-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1 5 9h3l-4 6h5v4h2v-4h5l-4-6h3z"/></svg>';
+function tagIcon(type) {
+  const isIndoor = type.includes('屋内');
+  const isOutdoor = type.includes('屋外');
+  if (isIndoor && isOutdoor) return ICON_HOUSE + ICON_TREE;
+  if (isIndoor) return ICON_HOUSE;
+  if (isOutdoor) return ICON_TREE;
+  return '';
+}
+
 const REGION_CLASS = {
   '関東': 'region-kanto',
   '関西': 'region-kansai',
@@ -1052,7 +1116,7 @@ function render() {
     card.setAttribute('aria-label', `${f.name}のクイックビューを開く`);
     card.innerHTML = `
       <div class="tags">
-        <span class="tag ${tagClass(f.type)}">${f.type}</span>
+        <span class="tag ${tagClass(f.type)}">${tagIcon(f.type)}${f.type}</span>
         <span class="tag ${regionClass(f.region)}">${f.region}</span>
       </div>
       <h3>${f.name}</h3>
