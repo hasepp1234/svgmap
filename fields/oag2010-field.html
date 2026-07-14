@@ -66,12 +66,12 @@
 </script>
 <style>
   :root {
-    --primary: #1f3864;
-    --accent: #2e5b8a;
-    --bg: #f4f6f9;
-    --border: #dfe3ea;
-    --text: #24303d;
-    --muted: #6b7684;
+    --primary: #46512f;
+    --accent: #b45309;
+    --bg: #f2f2e6;
+    --border: #dce0c8;
+    --text: #262a1e;
+    --muted: #6d7259;
   }
   * { box-sizing: border-box; }
   body {
@@ -107,11 +107,12 @@
     line-height: 1.8;
   }
   main h2 { color: var(--primary); font-size: 16px; margin-top: 28px; }
-  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 12px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
   table th, table td {
-    text-align: left; padding: 10px 12px; border: 1px solid var(--border); font-size: 14px; vertical-align: top;
+    text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: top;
   }
-  table th { background: #eef2f7; width: 30%; white-space: nowrap; }
+  table th { background: #f0ead9; width: 30%; white-space: nowrap; font-weight: 600; }
+  table tr:last-child th, table tr:last-child td { border-bottom: none; }
   .back-link { display: inline-block; margin-top: 20px; color: var(--accent); text-decoration: none; font-size: 14px; }
   .back-link:hover { text-decoration: underline; }
   footer {
@@ -158,7 +159,7 @@
     border-radius: 8px;
     padding: 6px 8px;
   }
-  .gear-mini-item:hover { background: #f4f6f9; }
+  .gear-mini-item:hover { background: #f2f2e6; }
   .gear-mini-item img { width: 40px; height: 40px; object-fit: contain; flex-shrink: 0; }
   .related-fields { margin-top: 24px; }
   .related-fields ul { list-style: none; margin: 10px 0 0; padding: 0; }
@@ -199,20 +200,20 @@
 
   .ad-slot { margin: 20px 0; }
   .ad-slot-inner {
-    min-height: 100px;
+    min-height: 56px;
     display: flex; align-items: center; justify-content: center;
-    background: #fff; border: 1px dashed var(--border); border-radius: 8px;
+    background: #fff; border: 1px solid var(--border); border-radius: 8px;
     color: var(--muted); font-size: 11px; letter-spacing: 0.05em;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #14181f;
-      --border: #2b323c;
-      --text: #e6e9ee;
-      --muted: #9aa4b2;
+      --bg: #171c14;
+      --border: #3a4530;
+      --text: #e8ecd8;
+      --muted: #a3ac8e;
     }
-    table th { background: #232a34; }
+    table th { background: #2a2d20; }
     .gear-mini { background: #1c222b; }
     .gear-top-pick a { background: #241f14; border-color: #4a3f16; }
     .toc { background: #1c222b; }
