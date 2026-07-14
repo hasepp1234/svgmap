@@ -32,12 +32,12 @@
 <link rel="canonical" href="https://www.sabage-db.com/about.html">
 <style>
   :root {
-    --primary: #1f3864;
-    --accent: #2e5b8a;
-    --bg: #f4f6f9;
-    --border: #dfe3ea;
-    --text: #24303d;
-    --muted: #6b7684;
+    --primary: #46512f;
+    --accent: #b45309;
+    --bg: #f2f2e6;
+    --border: #dce0c8;
+    --text: #262a1e;
+    --muted: #6d7259;
   }
   * { box-sizing: border-box; }
   body {
@@ -75,11 +75,12 @@
   main h2 { color: var(--primary); font-size: 18px; margin-top: 32px; }
   main p { margin: 8px 0; }
   main a { color: var(--accent); }
-  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 12px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
   table th, table td {
-    text-align: left; padding: 10px 12px; border: 1px solid var(--border); font-size: 14px;
+    text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 14px;
   }
-  table th { background: #eef2f7; width: 30%; }
+  table th { background: #f0ead9; width: 30%; font-weight: 600; }
+  table tr:last-child th, table tr:last-child td { border-bottom: none; }
   footer {
     text-align: center; font-size: 12px; color: var(--muted); padding: 20px 0 30px;
   }
@@ -87,12 +88,12 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #14181f;
-      --border: #2b323c;
-      --text: #e6e9ee;
-      --muted: #9aa4b2;
+      --bg: #171c14;
+      --border: #3a4530;
+      --text: #e8ecd8;
+      --muted: #a3ac8e;
     }
-    table th { background: #232a34; }
+    table th { background: #2a2d20; }
   }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9618539805759239"

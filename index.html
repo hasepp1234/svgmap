@@ -35,13 +35,13 @@
 <link rel="canonical" href="https://www.sabage-db.com/">
 <style>
   :root {
-    --primary: #1f3864;
-    --accent: #2e5b8a;
-    --bg: #f4f6f9;
+    --primary: #46512f;
+    --accent: #b45309;
+    --bg: #f2f2e6;
     --card-bg: #ffffff;
-    --border: #dfe3ea;
-    --text: #24303d;
-    --muted: #5b6674;
+    --border: #dce0c8;
+    --text: #262a1e;
+    --muted: #6d7259;
   }
   * { box-sizing: border-box; }
   body {
@@ -77,18 +77,18 @@
     padding: 0 16px;
   }
   .ad-slot-inner {
-    min-height: 100px;
+    min-height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--card-bg);
-    border: 1px dashed var(--border);
+    border: 1px solid var(--border);
     border-radius: 8px;
     color: var(--muted);
     font-size: 11px;
     letter-spacing: 0.05em;
   }
-  @media (max-width: 480px) { .ad-slot-inner { min-height: 80px; } }
+  @media (max-width: 480px) { .ad-slot-inner { min-height: 44px; } }
   .banner {
     background: #fff8e1;
     color: #7a5c00;
@@ -113,7 +113,16 @@
     background: #fff;
   }
   .controls input { flex: 1 1 220px; }
-  .controls select { flex: 0 1 150px; }
+  .controls select {
+    flex: 0 1 150px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236d7259' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+    cursor: pointer;
+  }
   .controls button {
     flex: 0 0 auto;
     padding: 9px 18px;
@@ -127,6 +136,7 @@
   #searchBtn:hover { background: var(--primary); }
   #resetBtn { background: #e9edf3; color: var(--text); border: 1px solid var(--border) !important; }
   #resetBtn:hover { background: #dde3ec; }
+  .controls input:focus, .controls select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(180,83,9,0.15); }
   .count-bar {
     max-width: 1000px;
     margin: 10px auto 0;
@@ -150,7 +160,7 @@
     cursor: pointer;
     transition: box-shadow 0.15s, transform 0.15s;
   }
-  .card:hover { box-shadow: 0 4px 14px rgba(31,56,100,0.12); transform: translateY(-2px); }
+  .card:hover { box-shadow: 0 4px 14px rgba(70,81,47,0.15); transform: translateY(-2px); }
   .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   .card .detail-link { display: inline-block; margin-top: 8px; font-size: 12px; color: var(--accent); text-decoration: none; }
   .card .detail-link:hover { text-decoration: underline; }
@@ -161,16 +171,16 @@
     border-radius: 999px;
     font-weight: 700;
   }
-  .tag.outdoor { background: #e6f4ea; color: #2a7a3f; }
-  .tag.indoor { background: #eef0fb; color: #4a4ab5; }
-  .tag.region-kanto { background: linear-gradient(135deg, #dbeafe, #93c5fd); color: #1e40af; }
-  .tag.region-kansai { background: linear-gradient(135deg, #ffedd5, #fdba74); color: #9a3412; }
-  .tag.region-chubu { background: linear-gradient(135deg, #dcfce7, #86efac); color: #166534; }
-  .tag.region-kyushu { background: linear-gradient(135deg, #f3e8ff, #d8b4fe); color: #6b21a8; }
-  .tag.region-hokkaido-tohoku { background: linear-gradient(135deg, #ffe4e6, #fda4af); color: #7a0e2c; }
-  .tag.region-chugoku { background: linear-gradient(135deg, #cffafe, #67e8f9); color: #155e75; }
-  .tag.region-shikoku { background: linear-gradient(135deg, #fef9c3, #fde047); color: #854d0e; }
-  .tag.region-okinawa { background: linear-gradient(135deg, #ccfbf1, #5eead4); color: #0f766e; }
+  .tag.outdoor { background: #d8dcbb; color: #414c1e; }
+  .tag.indoor { background: #e0e0c5; color: #4f5a2c; }
+  .tag.region-kanto { background: #d6dcc0; color: #414c1e; }
+  .tag.region-kansai { background: #ecd9b8; color: #8a5a1e; }
+  .tag.region-chubu { background: #d7e2dd; color: #2d6660; }
+  .tag.region-kyushu { background: #e6ddc8; color: #6b5636; }
+  .tag.region-hokkaido-tohoku { background: #e3d4d0; color: #7a3b2e; }
+  .tag.region-chugoku { background: #d9dfe0; color: #445566; }
+  .tag.region-shikoku { background: #ece1bd; color: #7a6416; }
+  .tag.region-okinawa { background: #d2e3d8; color: #1f6b52; }
   .card h3 { margin: 4px 0 6px; font-size: 16px; color: var(--primary); }
   .card .loc { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
   .card .price { font-size: 13px; font-weight: 600; }
@@ -181,7 +191,7 @@
     font-size: 14px;
   }
   .overlay {
-    position: fixed; inset: 0; background: rgba(20,28,40,0.5);
+    position: fixed; inset: 0; background: rgba(23,28,20,0.55);
     display: none; align-items: center; justify-content: center; padding: 20px; z-index: 10;
   }
   .overlay.open { display: flex; }
@@ -277,7 +287,7 @@
     text-align: center;
     transition: box-shadow 0.15s, transform 0.15s;
   }
-  .gear-card:hover { box-shadow: 0 4px 14px rgba(31,56,100,0.12); transform: translateY(-2px); }
+  .gear-card:hover { box-shadow: 0 4px 14px rgba(70,81,47,0.15); transform: translateY(-2px); }
   .gear-card img { width: 96px; height: 96px; object-fit: contain; margin-bottom: 8px; }
   .gear-card .gear-label { font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 4px; }
   .gear-card .gear-name { font-size: 12px; line-height: 1.5; margin-bottom: 6px; }
@@ -285,14 +295,15 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #14181f;
-      --card-bg: #1c222b;
-      --border: #2b323c;
-      --text: #e6e9ee;
-      --muted: #9aa4b2;
+      --bg: #171c14;
+      --card-bg: #232a1e;
+      --border: #3a4530;
+      --text: #e8ecd8;
+      --muted: #a3ac8e;
     }
     .banner { background: #2b2510; color: #e8d27a; border-bottom-color: #4a3f16; }
     .controls input, .controls select { background: var(--card-bg); color: var(--text); }
+    .controls select { background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a3ac8e' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
     #resetBtn { background: #232b36; }
     #resetBtn:hover { background: #2b3542; }
     .modal { background: var(--card-bg); }
