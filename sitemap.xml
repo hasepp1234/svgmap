@@ -61,16 +61,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sabage-db.com/fields/orange-box.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sabage-db.com/fields/clochettecerf.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.sabage-db.com/fields/combat-ready-aichi.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -156,11 +146,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sabage-db.com/fields/saitama.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.sabage-db.com/fields/minmori.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -211,11 +196,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sabage-db.com/fields/rock254.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.sabage-db.com/fields/asaruto3.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -227,11 +207,6 @@
   </url>
   <url>
     <loc>https://www.sabage-db.com/fields/garden-z.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sabage-db.com/fields/kowlooncity0801.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -351,11 +326,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sabage-db.com/fields/agito.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.sabage-db.com/fields/sgfield369.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -367,11 +337,6 @@
   </url>
   <url>
     <loc>https://www.sabage-db.com/fields/skybase-toyama.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sabage-db.com/fields/area365.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
