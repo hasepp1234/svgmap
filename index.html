@@ -902,6 +902,7 @@
   <select id="region" aria-label="地域で絞り込み"><option value="">地域：すべて</option></select>
   <select id="type" aria-label="屋内・屋外で絞り込み"><option value="">屋内/屋外：すべて</option></select>
   <select id="rental" aria-label="レンタルの有無で絞り込み"><option value="">レンタル：すべて</option><option value="あり">レンタルあり</option></select>
+  <select id="shuttle" aria-label="送迎の有無で絞り込み"><option value="">送迎：すべて</option><option value="あり">送迎あり</option></select>
   <select id="sort" aria-label="並べ替え">
     <option value="">並び替え：標準</option>
     <option value="checked-desc">最終確認日が新しい順</option>
@@ -983,6 +984,7 @@ const searchInput = document.getElementById('search');
 const regionSel = document.getElementById('region');
 const typeSel = document.getElementById('type');
 const rentalSel = document.getElementById('rental');
+const shuttleSel = document.getElementById('shuttle');
 const sortSel = document.getElementById('sort');
 const searchBtn = document.getElementById('searchBtn');
 const resetBtn = document.getElementById('resetBtn');
@@ -1043,6 +1045,7 @@ function render() {
   const region = regionSel.value;
   const type = typeSel.value;
   const rental = rentalSel.value;
+  const shuttle = shuttleSel.value;
   const sort = sortSel ? sortSel.value : '';
 
   const filtered = FIELDS.filter(f => {
@@ -1051,6 +1054,11 @@ function render() {
     if (rental) {
       const hasRental = f.rental && f.rental !== '要確認' && f.rental !== '';
       if (!hasRental) return false;
+    }
+    if (shuttle) {
+      const s = f.shuttle_service || '';
+      const hasShuttle = s && !s.startsWith('なし') && !s.startsWith('確認中');
+      if (!hasShuttle) return false;
     }
     if (q) {
       const hay = (f.name + f.pref + f.city + f.note).toLowerCase();
@@ -1165,10 +1173,11 @@ function resetFilters() {
   regionSel.value = '';
   typeSel.value = '';
   rentalSel.value = '';
+  shuttleSel.value = '';
   render();
 }
 
-[regionSel, typeSel, rentalSel, sortSel].forEach(el => {
+[regionSel, typeSel, rentalSel, shuttleSel, sortSel].forEach(el => {
   el.addEventListener('change', render);
 });
 searchInput.addEventListener('input', render);
