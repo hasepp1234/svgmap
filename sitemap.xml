@@ -56,11 +56,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sabage-db.com/fields/specialforce.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.sabage-db.com/fields/combat-ready-aichi.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -436,11 +431,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sabage-db.com/fields/oag2010-field.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.sabage-db.com/fields/j-compact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -510,7 +500,6 @@
   <url><loc>https://www.sabage-db.com/fields/phantom-avenue.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.sabage-db.com/fields/fuji-forest-force.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.sabage-db.com/fields/still-forest.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.sabage-db.com/fields/g-style-iida.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.sabage-db.com/fields/bloom-komoro.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.sabage-db.com/fields/sf634.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
